@@ -516,19 +516,37 @@ function initMap(Day = null, CurrentPosition = {}) {
                     let estado = data.oufofroute[i].reaname;
                     if (data.oufofroute[i].readmd > 0 && data.oufofroute[i].reapay > 0) {
                         motivo = `<small class="label pull-right bg-blue">PEDIDO</small></br><small class="label pull-right bg-blue">COBRANZA</small>`;
+                        colorPrimario = '#efb810';
+                        colorSecundario = '#efb810';
                     }
                     else if (data.oufofroute[i].readmd > 0) {
                         motivo = '<small class="label pull-right bg-blue">PEDIDO</small>';
+                        colorPrimario = '#efb810';
+                        colorSecundario = '#efb810';
                     }
                     else if (data.oufofroute[i].reapay > 0) {
+                        colorPrimario = '#efb810';
+                        colorSecundario = '#efb810';
                         motivo = '<small class="label pull-right bg-orange">COBRANZA</small>';
                     }
+                    /**/
+                    else if (data.oufofroute[i].reanovisit > 0) {
+                        motivo = '<small class="label pull-right bg-red">NO-VISITADO</small>';
+                        colorPrimario = '#FE0000';
+                        colorSecundario = '#820000';
+                    }
+                    else if (data.oufofroute[i].reanosale > 0) {
+                        motivo = '<small class="label pull-right bg-red">NO-VENDIDO</small>';
+                        colorPrimario = "#FE0000";
+                        colorSecundario = "#820000";
+                    }
+                    /**/
                     let content = buildModelOutOfRoute(data.oufofroute[i].cuscode, estado, motivo);
                     
                     L.marker([data.oufofroute[i].cuslatitude.replace(",", "."), data.oufofroute[i].cuslongitude.replace(",", ".")], {
                         icon: L.mapquest.icons.flag({
-                            primaryColor: '#efb810',
-                            secondaryColor: '#f8f32b',
+                            primaryColor: colorPrimario,
+                            secondaryColor: colorSecundario,
                             shadow: true,
                             size: 'md',
                             symbol: 'F'
@@ -620,35 +638,6 @@ $('#day-change').change(function (e) {
 });
 initMap();
 //initMapMarket();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
